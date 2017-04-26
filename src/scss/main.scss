@@ -1,0 +1,111 @@
+$bg:lightCyan;
+$fill: lightblue;
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: lightblue;
+    position: relative;
+}
+
+.five-day-icon {
+    height: 48px;
+    width: 48px;
+}
+
+.days {
+    flex: 1 100%;
+}
+
+.five-day {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    width: 500px;
+    background-color: lightcyan;
+    height: 200px;
+    /* center by defining width and height then using negative margins of -50% of height for top and -50% of width for left   */
+    margin: -100px 0 0 -250px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.display {
+    font-family: 'Palanquin Dark', sans-serif;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-flow: row nowrap;
+    & > div {
+        font-size: 1.8em;
+        line-height: 100%;
+    }
+    & > input[type="text"] {
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+        border-bottom: 1px solid black;
+        font-size: 1.4em;
+        text-align: center;
+        margin: 0 10px;
+        font-family: 'Palanquin Dark', sans-serif;
+        font-weight: 600;
+        line-height: 1.4em;
+        width: 35%;
+        text-transform: uppercase;
+        &:focus {
+            outline-color: rgba(0, 0, 0, 0);
+        }
+    }
+    & > input[type="button"] {
+        padding: 0 20px;
+        font-size: 1em;
+        font-family: 'Palanquin Dark', sans-serif;
+        font-weight: 600;
+    }
+}
+
+.hourglass {
+    display: block;
+    background: $bg;
+    margin: 3em auto;
+    width: 2em;
+    height: 4em;
+    box-shadow: inset $bg 0 0 0 0, inset $fill 0 2em 0 0, inset $bg 0 0 4em 0;
+    animation: hourglass 1s linear infinite;
+}
+
+.outer {
+    fill: $fill;
+}
+
+.middle {
+    fill: $bg;
+}
+
+@keyframes hourglass {
+    0% {
+        transform: rotate(0deg);
+        box-shadow: inset $bg 0 0 0 0, inset $fill 0 2em 0 0, inset $bg 0 4em 0 0, inset $fill 0 4em 0 0;
+    }
+    80% {
+        transform: rotate(0deg);
+        box-shadow: inset $bg 0 2em 0 0, inset $fill 0 2em 0 0, inset $bg 0 2em 0 0, inset $fill 0 4em 0 0;
+    }
+    100% {
+        transform: rotate(180deg);
+        box-shadow: inset $bg 0 2em 0 0, inset $fill 0 2em 0 0, inset $bg 0 2em 0 0, inset $fill 0 4em 0 0;
+    }
+}
