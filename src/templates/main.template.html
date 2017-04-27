@@ -1,0 +1,11 @@
+<div class="container">
+  <loading ng-if="loading"></loading>
+  <div class="display" ng-if="!loading && !displaying" ng-show="!widget.noLocation">
+    <div>Enter a city: </div>
+    <input type="text" ng-model="widget.location" />
+    <input type="button" value="GO" ng-click="widget.getReport(widget.location)" />
+  </div>
+  <div class="five-day">
+    <div class="days" ng-repeat="days in fiveDay track by $index">{{days.applicable_date}}{{days.weather_state_name}}<img ng-src="https://www.metaweather.com/static/img/weather/{{days.weather_state_abbr}}.svg" class="five-day-icon" /></div>
+  </div>
+</div>
