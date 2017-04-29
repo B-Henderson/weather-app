@@ -14,12 +14,24 @@ body {
 }
 
 .five-day-icon {
-    height: 48px;
-    width: 48px;
+    height: 64px;
+    width: 64px;
 }
 
 .days {
+    margin: 5px;
     flex: 1 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    text-align: center;
+    &>div {
+        flex: 1 50%;
+    }
+    &>img {
+        flex: 1 50%;
+        align-self: center;
+    }
 }
 
 .five-day {

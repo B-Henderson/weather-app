@@ -8,6 +8,30 @@ app.config(['$httpProvider', function($httpProvider) {
 }]);
 
 
+app.filter('days', function($filter) {
+  return function(input, name) {
+    if (input) {
+      var formatting = $filter('date')(input, 'dd-MMMM');
+      var today = $filter('date')(new Date(), 'dd-MMMM');
+      if (formatting === today && name) {
+        return 'Today ';
+      }
+      var tomorrow = new Date();
+      tomorrow = tomorrow.setDate(tomorrow.getDate() + 1);
+      console.log(tomorrow);
+      tomorrow = $filter('date')(tomorrow, 'dd-MMMM');
+      if (formatting === tomorrow && name) {
+        return 'Tomorrow';
+      }
+
+      if (name) {
+        return $filter('date')(input, 'EEEE');
+      }
+      return formatting
+    }
+  };
+})
+
 app.factory('serviceFactory', function($http, provideWeatherFactory) {
   var serviceFactory = function(param) {
     return $http({
@@ -28,7 +52,7 @@ app.factory('provideWeatherFactory', function($http) {
 });
 
 
-function wController($scope, provideWeatherFactory, serviceFactory) {
+function wController($scope, provideWeatherFactory, serviceFactory, daysFilter, $filter) {
   this.noLocation = null;
   $scope.loading = false;
   this.getReport = function(param) {
@@ -49,9 +73,6 @@ function wController($scope, provideWeatherFactory, serviceFactory) {
     console.log('five day', $scope.fiveDay);
   }
 };
-
-
-templatehtml = '<div class="container"><loading ng-if="loading"></loading><div class="display" ng-if="!loading && !displaying" ng-show="!widget.noLocation"><div>Enter a city: </div><input type="text" ng-model="widget.location"/><input type="button" value="GO" ng-click="widget.getReport(widget.location)"/></div><div class="five-day"><div class="days" ng-repeat="days in fiveDay track by $index">{{days.applicable_date}}{{days.weather_state_name}}<img ng-src="https://www.metaweather.com/static/img/weather/{{days.weather_state_abbr}}.svg" class="five-day-icon"/></div></div></div>';
 
 
 angular.module('app').component('widgetComponent', {

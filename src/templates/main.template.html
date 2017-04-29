@@ -6,6 +6,9 @@
     <input type="button" value="GO" ng-click="widget.getReport(widget.location)" />
   </div>
   <div class="five-day">
-    <div class="days" ng-repeat="days in fiveDay track by $index">{{days.applicable_date}}{{days.weather_state_name}}<img ng-src="https://www.metaweather.com/static/img/weather/{{days.weather_state_abbr}}.svg" class="five-day-icon" /></div>
+    <div class="days" ng-repeat="days in fiveDay track by $index">
+      <div class="five-day-dates">{{days.applicable_date|days:true}}
+        <br/>{{days.applicable_date|days}}</div>
+      <div class="five-day-name">{{days.weather_state_name}}</div><img ng-src="https://www.metaweather.com/static/img/weather/{{days.weather_state_abbr}}.svg" class="five-day-icon" /></div>
   </div>
 </div>
