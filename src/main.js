@@ -18,7 +18,6 @@ app.filter('days', function($filter) {
       }
       var tomorrow = new Date();
       tomorrow = tomorrow.setDate(tomorrow.getDate() + 1);
-      console.log(tomorrow);
       tomorrow = $filter('date')(tomorrow, 'dd-MMMM');
       if (formatting === tomorrow && name) {
         return 'Tomorrow';
@@ -58,7 +57,6 @@ function wController($scope, provideWeatherFactory, serviceFactory, daysFilter, 
   this.getReport = function(param) {
     $scope.loading = true;
     provideWeatherFactory(param).then(function(result) {
-      console.log('results', result);
       serviceFactory(result.data[0].woeid).then(function(result) {
         $scope.weather = result.data;
         $scope.loading = false;
@@ -70,7 +68,6 @@ function wController($scope, provideWeatherFactory, serviceFactory, daysFilter, 
   var displayResults = function() {
     $scope.displaying = true;
     $scope.fiveDay = $scope.weather.consolidated_weather;
-    console.log('five day', $scope.fiveDay);
   }
 };
 
